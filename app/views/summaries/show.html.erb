@@ -1,0 +1,40 @@
+<h1><%= @month.strftime('%B %Y') %> monthly summary</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Balance (€)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @balances.each do |user, balance| %>
+      <tr>
+        <td><%= user.name || user.email_address %></td>
+        <td style="color: <%= balance >= 0 ? 'green' : 'red' %>">
+          <%= number_to_currency(balance) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% @efforts.each do |e| %>
+  <p><%= e[:user].name %>: <%= number_to_currency(e[:amount]) %> → <%= e[:percentage] %>%</p>
+<% end %>
+
+<% @salaries.each do |salary| %>
+  <p><strong><%= salary.user.name %></strong>: <%= number_to_currency(salary.amount) %></p>
+<% end %>
+
+<% @grouped_expenses.each do |type, list| %>
+  <h3><%= type.titleize %> expenses</h3>
+  <ul>
+    <% list.each do |expense| %>
+      <li>
+        <%= expense.title %>: <%= number_to_currency(expense.amount) %>
+        (por <%= expense.created_by.name %> el <%= l(expense.month) %>)
+      </li>
+    <% end %>
+  </ul>
+<% end %>

@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  expense: one
+  user: one
+  percentage: 9.99
+  assigned: false
+
+two:
+  expense: two
+  user: two
+  percentage: 9.99
+  assigned: false
